@@ -16,8 +16,8 @@ public class LongestValidParentheses {
         return maxans;
     }
     
-    public static void main(String args[]) 
-        System.out.println(longestValidParentheses(")()())");
-        System.out.println(longestValidParentheses("(()()()()))()))))()");
+    public static void main(String args[]) {
+        System.out.println(longestValidParentheses(")()())"));
+        System.out.println(longestValidParentheses("(()()()()))()))))()"));
 	  }
 }

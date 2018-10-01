@@ -3,7 +3,7 @@
 import java.util.Arrays;
 
 
-public class LongestIncreasingSubSequenceOlogNMethod {
+class LongestIncreasingSubSequenceOlogNMethod {
 
     /**
      * Returns index in T for ceiling of s
