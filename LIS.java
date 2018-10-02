@@ -2,40 +2,52 @@ import java.util.*;
 import java.io.*;
 
 class LIS {
-	public static void printSolution(int[] dp, int[] track, int[] seq, int start) {
-		Stack<Integer> stck = new Stack<Integer>();
-		while(true) {
-			stck.push(seq[start]);
-			if(dp[start] == 1) break;
-			start = track[start];
-		} 
-		while(stck.isEmpty() == false) {
-			System.out.print(stck.pop() + " ");
-		}
-		System.out.println();
-	}
+	/** function LongestIncreasingSubsequenceLength **/
+	public static List<Integer> LongestIncreasingSubsequenceLength(int[] array) {
 
-	public static void LongestIncreasingSubsequence(int[] seq) {
-		int[] dp = new int[seq.length];
-		int[] track = new int[seq.length];
-		Arrays.fill(dp, 1);
+		List<List<Integer>> listOfAllCombination = new ArrayList<>();
 
-		int max_ind = 0;
-		for(int i=0; i<dp.length; i++) {
-			for(int j=i+1; j<dp.length; j++) {
-				if(seq[j] > seq[i] && dp[j] < dp[i]+1) {
-					dp[j] = dp[i] + 1;
-					track[j] = i;
+		for (int i : array) {
+
+			boolean isListFound = false;
+			List<List<Integer>> tempListOfList = new ArrayList<>();
+			for (List<Integer> compare : listOfAllCombination) {
+				if (compare.get(compare.size() - 1) < i) {
+					List<Integer> selectedList = new ArrayList<>();
+					selectedList.addAll(compare);
+					selectedList.add(i);
+					tempListOfList.add(selectedList);
+					isListFound = true;
 				}
 			}
-			if(dp[i] > dp[max_ind])
-				max_ind = i;
+			listOfAllCombination.addAll(tempListOfList);
+			if (!isListFound) {
+				List<Integer> selectedList = new ArrayList<>();
+				selectedList.add(i);
+				listOfAllCombination.add(selectedList);
+			}
+
 		}
-		System.out.print("Length of LIS = " + dp[max_ind] + "\nSequence = ");
-		printSolution(dp, track, seq, max_ind);
+
+		List<Integer> selectedList = listOfAllCombination.get(0);
+
+		for (List checkSize : listOfAllCombination) {
+			if (checkSize.size() > selectedList.size()) {
+				selectedList = checkSize;
+			}
+		}
+
+		return selectedList;
 	}
-	public static void main(String args[]) {
-		int[] seq = {3, 2, 4, 6};
-		LongestIncreasingSubsequence(seq);
+	public static void main(String[] args) {
+		int[] i = { 16, 3, 5, 19, 10, 14, 12, 0, 15 };
+		List<Integer> l = LongestIncreasingSubsequenceLength(i);
+		System.out.print("Length of LIS = " + l.size() + "\nSequence = ");
+		System.out.print("[ ");
+		for (int n : l) {
+			System.out.print(n + " ");
+		}
+		System.out.print("]");
 	}
 }
+
