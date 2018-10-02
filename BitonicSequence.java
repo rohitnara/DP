@@ -1,6 +1,9 @@
 /*
 Given an array arr[0 … n-1] containing n positive integers, a subsequence of arr[]
 is called Bitonic if it is first increasing, then decreasing.
+
+eg: Input arr[] = {80, 60, 30, 40, 20, 10}
+Output: 5 (Longest Bitonic Subsequence is 80, 60, 30, 20, 10)
  */
 public class BitonicSequence {
     public int longestSequence(int arr[]){
